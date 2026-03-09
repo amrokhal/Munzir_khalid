@@ -3,289 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>موسوعة الموسيقار محمد الأمين</title>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --gold: #c5a059;
-            --dark-bg: #1a1a1a;
-            --card-bg: #262626;
-            --text-color: #f4f4f4;
-        }
-
-        body {
-            font-family: 'Cairo', sans-serif;
-            background-color: var(--dark-bg);
-            color: var(--text-color);
-            margin: 0;
-            padding: 20px;
-            line-height: 1.6;
-        }
-
-        header {
-            text-align: center;
-            padding: 40px 0;
-            border-bottom: 2px solid var(--gold);
-            margin-bottom: 40px;
-        }
-
-        header h1 {
-            font-family: 'Amiri', serif;
-            font-size: 3rem;
-            color: var(--gold);
-            margin: 0;
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        /* تصميم قائمة الأغاني */
-        .songs-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin-bottom: 50px;
-        }
-
-        .song-card {
-            background: var(--card-bg);
-            padding: 20px;
-            border-radius: 12px;
-            border: 1px solid #333;
-            text-align: center;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .song-card:hover {
-            border-color: var(--gold);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-        }
-
-        .song-card h3 {
-            color: var(--gold);
-            margin-top: 0;
-        }
-
-        /* تصميم عرض الكلمات */
-        .lyrics-section {
-            display: none; /* مخفي افتراضياً */
-            background: #fff;
-            color: #333;
-            padding: 40px;
-            border-radius: 15px;
-            margin-top: 30px;
-            box-shadow: 0 0 30px rgba(0,0,0,0.3);
-            white-space: pre-line; /* للحفاظ على تنسيق الأسطر */
-            font-family: 'Amiri', serif;
-            font-size: 1.4rem;
-            text-align: center;
-            border-right: 8px solid var(--gold);
-        }
-
-        .lyrics-section h2 {
-            font-family: 'Cairo', sans-serif;
-            color: var(--dark-bg);
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
-        }
-
-        .back-btn {
-            background: var(--gold);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-family: 'Cairo', sans-serif;
-            margin-bottom: 20px;
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 100px;
-            font-size: 0.9rem;
-            color: #888;
-        }
-    </style>
+    <title>موسوعة محمد الأمين</title>
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Cairo:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<div class="container">
-    <header>
-        <h1>موسوعة محمد الأمين</h1>
-        <p>توثيق حي لأجمل ما غنى الموسيقار</p>
-    </header>
+<header>
+    <h1>موسوعة محمد الأمين</h1>
+    <p>أرشيف كلمات أغاني الموسيقار</p>
+</header>
 
-    <div id="main-menu">
-        <div class="songs-grid">
-            <div class="song-card" onclick="showLyrics('خمسة سنين')">
-                <h3>خمسة سنين</h3>
-                <p>اضغط لقراءة الكلمات</p>
-            </div>
-            <div class="song-card" onclick="showLyrics('الجريدة')">
-                <h3>الجريدة</h3>
-                <p>اضغط لقراءة الكلمات</p>
-            </div>
-            <div class="song-card" onclick="showLyrics('وعد النوار')">
-                <h3>وعد النوار</h3>
-                <p>اضغط لقراءة الكلمات</p>
-            </div>
-            <div class="song-card" onclick="showLyrics('يا حاسدين غرامنا')">
-                <h3>يا حاسدين غرامنا</h3>
-                <p>اضغط لقراءة الكلمات</p>
-            </div>
-            <div class="song-card" onclick="showLyrics('همس الشوق')">
-                <h3>همس الشوق</h3>
-                <p>اضغط لقراءة الكلمات</p>
-            </div>
-        </div>
-    </div>
-
-    <div id="lyrics-display" class="lyrics-section">
-        <button class="back-btn" onclick="showMenu()">← العودة للقائمة</button>
-        <h2 id="song-title"></h2>
-        <div id="song-text"></div>
-    </div>
-
-    <footer>
-        <p>جميع الحقوق محفوظة لمحبي الموسيقار محمد الأمين © 2024</p>
-    </footer>
+<div class="search-box">
+    <input type="text" id="myInput" placeholder="ابحث عن اسم الأغنية...">
 </div>
 
-<script>
-    const lyricsData = {
-        'خمسة سنين': `خمسة سنين معاك يا زينة الأيام
-يا نوّارة الحلوين مرّت حِلوة زي أنسام
-وزي أحلام صبيّة نديّة، زي ياسمين
-وزي لهفة بعيد مشتاق
-يلاقي أحبّته الغايبن
-خمسة سنين
-ودرب الريد معاك أخضر
-خمسة سنين، بريدك كل يوم أكتر
-أحاول مرّة بس أنساك
-عشان يا غالية أتذّكر
-أجي وألقاك، ديمة معاي
-وألقى هواك ملك دنياي
-وفي أعماقي إتحكّّر
-خمسة سنين...........`,
+<div class="songs-list" id="songsContainer"></div>
 
-        'الجريدة': `سارحة مالِك يا حبيبة
-ساهية وأفكارك بعيدة
-بقرأ في عيونك حياتي
-وإنت مشغولة بجريدة
-بتقرئي في إيه كلّميني
-ياسلام مهتمه عاملة
-يعنى لازم تقرى هسه مقالْ
-بحاله ، وقصّه كاملةْ
-كم شهور مرّت علينا
-وبينا فرقه شامله
-العيون رويانة تبكي
-والقلوب مشتاقة أمله
-أي حاجة تمر بخاطركْ
-قصة أو أخبار جديدةْ
-عندي ليك خبر أهمْ
-جايبو بي أشواق شديدةْ
-أسمعي وطاوعيني مرّة
-أيوة، ما تخليك عنيدهْ
-عايز أقول لكْ
-ليه أقول لكْ
-ما بقولكْ
-مش مخير
-ولّة سيبك أقرئي أحسن في الجريدة
-ساعة مرت ساعة وأكتر
-والوقت روّح تأخر
-زى عنادك عايز أعاند
-لكن يظهر ما حا أقدر
-أمرى لله كنت عايز أقول
-بحبك يا وحيدة
-بقرى في عيونك حياتي
-وإنت مشغولة بجريدة....`,
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <button class="close-btn" onclick="closeModal()">إغلاق ✕</button>
+        <h2 id="songTitle"></h2>
+        <div id="songLyrics"></div>
+    </div>
+</div>
 
-        'وعد النوار': `ياريت من أول وريتنا إنك يمكن تتأخر يوم
-كان غايتو اطمنا شويه.. وبحرك يا ليل ما طفنا نجوم
-بيقولو الغائب عذره معاه وفي غيابك ياما نشيل اللوم..
-
-مرت لحظات و كمان ساعات طالت وحياتك منتظرين
-لو وشوش صوت الريح في الباب يسبقنا الشوق قبل العينين
-و نعاين الشارع نلقاهو..تائه في دموع المغلوبين..
-
-العيد الجاب الناس لينا ما جابك .. يعني نسيتنا خلاص
-مع انك إنت الخليتنا نغني الحب ذكرى و إخلاص
-صبحت دمعتنا وسادتنا و كده حاول اعرف لينا خلاص..
-
-شال النوار ظلل بيتنا..من بهجة وعدك وما جيتنا
-وفضلنا وحاتك منتظرين.. شوف وين روحتنا
-و وين وديتنــا شوف وين وين...........`,
-
-        'يا حاسدين غرامنا': `ياحاسدين غرامنا وياقاصدين خصامنا
-شوفوا غيرى وغير حبيبي
-يا دايرين تقولوا وماقادرين تقولوا
-إيه عايزين تقولوا في وفى حبيبي
-قولوا وقولوا قالوا مهما تقولوا قالوا
-مارا يحين تنالوا منى ومن حبيبي
-ديل قلبين ضماهم غرام
-ديل إتنين دنياهم سلام
-محال يحصل خصام
-بيني وبين حبيبي
-عهدي فيه وعهدو في
-ريدي ليه وريدو لي
-أوصف فيه ويوصف في
-نصبر كمان نصبر شوية
-نشيل أملنا نقابل أهلنا
-يقولوا أهلاً خلاص قبلنا
-يتم منانا يفرح أملنا
-ونعيش برانا نعيش في جنه
-لا يقولوا قالوا لا يقولوا قلنا..`,
-
-        'همس الشوق': `يا ريتنى لو أقدر أقول
-فيكِ الكلام الما أنكتب
-واجلي المقاطع بالذهب
-وأفرد صباح حُسنِك وشاح
-يمسح عذاب عمري المسطرّ باللهب
-بريدك
-كلمه كان رفّت
-يِهش ثغر النجوم و يسطعَ
-ولما ينادى همس الشوق
-يقيف كل الزمن ويسمع
-عيونك ديل عيون أهلي
-الحُنان زى نغمة في مقطع
-وطُهرِك تاج جواهرهُ ألعزه
-وإنت ألعزه ليك تركع
-بحبِك يا صباح العيد
-ويا فَرَح العريس السار
-وأحِسّك في سما الأزمان
-شمس بِتضَوى للمشوار
-زمان يا حلوه ساقني الليل
-وغِبْتَ وضعتَ في الأسفار
-ولّما لقيت عيونك ديل
-بديت أعشق عيون الدار
-وَحَياة ريدي اللي شاف طيفِك
-كثير قُباّل يلاقى ويشوف
-جراح الماضي بيك نامت
-وغابت كلُ رعشة خوف
-بحبك ومافى غيرك نور
-يهِل ويغمرُ طريق الشوق
-وما في بَلَاك نور بِسْطَع
-ولا فرحاً يسوقني يطوف.....`
-    };
-
-    function showLyrics(songName) {
-        document.getElementById('main-menu').style.display = 'none';
-        document.getElementById('lyrics-display').style.display = 'block';
-        document.getElementById('song-title').innerText = songName;
-        document.getElementById('song-text').innerText = lyricsData[songName];
-        window.scrollTo(0,0);
-    }
-
-    function showMenu() {
-        document.getElementById('main-menu').style.display = 'block';
-        document.getElementById('lyrics-display').style.display = 'none';
-    }
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
