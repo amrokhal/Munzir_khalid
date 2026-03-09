@@ -1,15 +1,27 @@
-<header>
-    <h1>مُختارات الباشكاتب</h1>
-    <p>رحلة في كلمات الموسيقار محمد الأمين</p>
-</header>
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مختارات الباشكاتب | محمد الأمين</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>مُختارات الباشكاتب</h1>
+        <p>روائع الموسيقار محمد الأمين</p>
+    </header>
 
-<div id="songs-list" class="song-container">
-    </div>
+    <main id="songs-list" class="song-container"></main>
 
-<div id="lyrics-modal">
-    <div class="modal-content">
-        <span class="close-btn" onclick="closeModal()">&times;</span>
-        <h2 id="current-title" style="color: var(--primary-color); margin-bottom: 20px; text-align: center;"></h2>
-        <div id="current-lyrics"></div>
+    <div id="lyrics-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2 id="current-title"></h2>
+            <hr style="border: 0.5px solid #d4af37; opacity: 0.3; margin: 20px 0;">
+            <div id="current-lyrics"></div>
+        </div>
     </div>
-</div>
+    <script src="script.js"></script>
+</body>
+</html>
