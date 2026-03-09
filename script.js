@@ -1,36 +1,56 @@
 document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('lyrics-modal');
+    const songsList = document.getElementById('songs-list');
+    const searchInput = document.getElementById('search-input');
+    const currentTitle = document.getElementById('current-title');
+    const currentLyrics = document.getElementById('current-lyrics');
+    
+    let allSongs = [];
 
     fetch('songs.json')
-        .then(response => {
-            if (!response.ok) throw new Error();
-            return response.json();
-        })
+        .then(response => response.json())
         .then(data => {
-            const list = document.getElementById('songs-list');
-            data.forEach(song => {
-                const card = document.createElement('div');
-                card.className = 'song-card';
-                card.innerHTML = `<h3>${song.title}</h3><p style="opacity:0.5; font-size:0.8rem;">انقر للقراءة</p>`;
-                card.onclick = () => {
-                    document.getElementById('current-title').innerText = song.title;
-                    document.getElementById('current-lyrics').innerText = song.lyrics;
-                    modal.style.display = 'block';
-                    document.body.style.overflow = 'hidden';
-                };
-                list.appendChild(card);
-            });
+            allSongs = data;
+            renderSongs(allSongs);
         })
         .catch(() => {
-            document.getElementById('songs-list').innerHTML = "<p>خطأ في تحميل البيانات.</p>";
+            songsList.innerHTML = `<div class="no-results">خطأ في تحميل البيانات.</div>`;
         });
 
-    window.onclick = (event) => {
-        if (event.target == modal) closeModal();
+    function renderSongs(songs) {
+        songsList.innerHTML = '';
+        if (songs.length === 0) {
+            songsList.innerHTML = `<div class="no-results">لا توجد نتائج.</div>`;
+            return;
+        }
+        songs.forEach(song => {
+            const card = document.createElement('div');
+            card.className = 'song-card';
+            card.innerHTML = `<h3>${song.title}</h3><p style="color:var(--primary-color); opacity:0.7;">انقر للقراءة</p>`;
+            card.onclick = () => openModal(song);
+            songsList.appendChild(card);
+        });
+    }
+
+    searchInput.oninput = (e) => {
+        const term = e.target.value.trim().toLowerCase();
+        const filtered = allSongs.filter(s => s.title.includes(term) || s.lyrics.includes(term));
+        renderSongs(filtered);
+    };
+
+    function openModal(song) {
+        currentTitle.innerText = song.title;
+        currentLyrics.innerText = song.lyrics;
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    window.closeModal = () => {
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    };
+
+    document.onkeydown = (e) => {
+        if (e.key === 'Escape') closeModal();
     };
 });
-
-function closeModal() {
-    document.getElementById('lyrics-modal').style.display = 'none';
-    document.body.style.overflow = 'auto';
-}
