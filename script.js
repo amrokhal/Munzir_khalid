@@ -1,159 +1,33 @@
-const allSongs = [
-    { 
-        title: "خمسة سنين", 
-        lyrics: `خمسة سنين معاك يا زينة الأيام
-يا نوّارة الحلوين مرّت حِلوة زي أنسام
-وزي أحلام صبيّة نديّة، زي ياسمين
-وزي لهفة بعيد مشتاق
-يلاقي أحبّته الغايبن
-خمسة سنين
-ودرب الريد معاك أخضر
-خمسة سنين، بريدك كل يوم أكتر
-أحاول مرّة بس أنساك
-عشان يا غالية أتذّكر
-أجي وألقاك، ديمة معاي
-وألقى هواك ملك دنياي
-وفي أعماقي إتحكّّر
-خمسة سنين...........` 
-    },
-    { 
-        title: "الجريدة", 
-        lyrics: `سارحة مالِك يا حبيبة
-ساهية وأفكارك بعيدة
-بقرأ في عيونك حياتي
-وإنت مشغولة بجريدة
-بتقرئي في إيه كلّميني
-ياسلام مهتمه عاملة
-يعنى لازم تقرى هسه مقالْ
-بحاله ، وقصّه كاملةْ
-كم شهور مرّت علينا
-وبينا فرقه شامله
-العيون رويانة تبكي
-والقلوب مشتاقة أمله
-أي حاجة تمر بخاطركْ
-قصة أو أخبار جديدةْ
-عندي ليك خبر أهمْ
-جايبو بي أشواق شديدةْ
-أسمعي وطاوعيني مرّة
-أيوة، ما تخليك عنيدهْ
-عايز أقول لكْ
-ليه أقول لكْ
-ما بقولكْ
-مش مخير
-ولّة سيبك أقرئي أحسن في الجريدة
-ساعة مرت ساعة وأكتر
-والوقت روّح تأخر
-زى عنادك عايز أعاند
-لكن يظهر ما حا أقدر
-أمرى لله كنت عايز أقول
-بحبك يا وحيدة
-بقرى في عيونك حياتي
-وإنت مشغولة بجريدة.......` 
-    },
-    { 
-        title: "وعد النوار", 
-        lyrics: `ياريت من أول وريتنا إنك يمكن تتأخر يوم
-كان غايتو اطمنا شويه.. وبحرك يا ليل ما طفنا نجوم
-بيقولو الغائب عذره معاه وفي غيابك ياما نشيل اللوم..
-مرت لحظات و كمان ساعات طالت وحياتك منتظرين
-لو وشوش صوت الريح في الباب يسبقنا الشوق قبل العينين
-و نعاين الشارع نلقاهو..تائه في دموع المغلوبين..
-العيد الجاب الناس لينا ما جابك .. يعني نسيتنا خلاص
-مع انك إنت الخليتنا نغني الحب ذكرى و إخلاص
-صبحت دمعتنا وسادتنا و كده حاول اعرف لينا خلاص..
-شال النوار ظلل بيتنا..من بهجة وعدك وما جيتنا
-وفضلنا وحاتك منتظرين.. شوف وين روحتنا
-و وين وديتنــا شوف وين وين...........` 
-    },
-    { 
-        title: "يا حاسدين غرامنا", 
-        lyrics: `ياحاسدين غرامنا وياقاصدين خصامنا
-شوفوا غيرى وغير حبيبي
-يا دايرين تقولوا وماقادرين تقولوا
-إيه عايزين تقولوا في وفى حبيبي
-قولوا وقولوا قالوا مهما تقولوا قالوا
-مارا يحين تنالوا منى ومن حبيبي
-ديل قلبين ضماهم غرام
-ديل إتنين دنياهم سلام
-محال يحصل خصام
-بيني وبين حبيبي
-عهدي فيه وعهدو في
-ريدي ليه وريدو لي
-أوصف فيه ويوصف في
-نصبر كمان نصبر شوية
-نشيل أملنا نقابل أهلنا
-يقولوا أهلاً خلاص قبلنا
-يتم منانا يفرح أملنا
-ونعيش برانا نعيش في جنه
-لا يقولوا قالوا لا يقولوا قلنا..` 
-    },
-    { 
-        title: "همس الشوق", 
-        lyrics: `يا ريتنى لو أقدر أقول
-فيكِ الكلام الما أنكتب
-واجلي المقاطع بالذهب
-وأفرد صباح حُسنِك وشاح
-يمسح عذاب عمري المسطرّ باللهب
-بريدك
-كلمه كان رفّت
-يِهش ثغر النجوم و يسطعَ
-ولما ينادى همس الشوق
-يقيف كل الزمن ويسمع
-عيونك ديل عيون أهلي
-الحُنان زى نغمة في مقطع
-وطُهرِك تاج جواهرهُ ألعزه
-وإنت ألعزه ليك تركع
-بحبِك يا صباح العيد
-ويا فَرَح العريس السار
-وأحِسّك في سما الأزمان
-شمس بِتضَوى للمشوار
-زمان يا حلوه ساقني الليل
-وغِبْتَ وضعتَ في الأسفار
-ولّما لقيت عيونك ديل
-بديت أعشق عيون الدار
-وَحَياة ريدي اللي شاف طيفِك
-كثير قُباّل يلاقى ويشوف
-جراح الماضي بيك نامت
-وغابت كلُ رعشة خوف
-بحبك ومافى غيرك نور
-يهِل ويغمرُ طريق الشوق
-وما في بَلَاك نور بِسْطَع
-ولا فرحاً يسوقني يطوف.....` 
-    }
-];
+document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('lyrics-modal');
 
-function renderSongs(data) {
-    const container = document.getElementById('songsContainer');
-    if(!container) return;
-    container.innerHTML = '';
-    data.forEach(song => {
-        const div = document.createElement('div');
-        div.className = 'song-item';
-        div.innerHTML = `<h3>${song.title}</h3><p style="color:#888;font-size:0.8rem">اضغط لقراءة الكلمات</p>`;
-        div.onclick = () => openModal(song);
-        container.appendChild(div);
-    });
-}
+    fetch('songs.json')
+        .then(response => response.json())
+        .then(data => {
+            const list = document.getElementById('songs-list');
+            
+            data.forEach(song => {
+                const card = document.createElement('div');
+                card.className = 'song-card';
+                card.innerHTML = `<h3>${song.title}</h3><p style="font-size: 0.9rem; margin-top:10px; opacity:0.6;">إضغط لعرض الكلمات</p>`;
+                
+                card.onclick = () => {
+                    document.getElementById('current-title').innerText = song.title;
+                    document.getElementById('current-lyrics').innerText = song.lyrics;
+                    modal.style.display = 'block';
+                    document.body.style.overflow = 'hidden'; // لمنع التمرير خلف النافذة
+                };
+                list.appendChild(card);
+            });
+        });
 
-function openModal(song) {
-    document.getElementById('songTitle').innerText = song.title;
-    document.getElementById('songLyrics').innerText = song.lyrics;
-    document.getElementById('myModal').style.display = 'block';
-    document.body.style.overflow = 'hidden'; 
-}
+    // إغلاق النافذة عند الضغط خارجها
+    window.onclick = (event) => {
+        if (event.target == modal) closeModal();
+    };
+});
 
 function closeModal() {
-    document.getElementById('myModal').style.display = 'none';
+    document.getElementById('lyrics-modal').style.display = 'none';
     document.body.style.overflow = 'auto';
 }
-
-const searchInput = document.getElementById('myInput');
-if(searchInput) {
-    searchInput.addEventListener('input', function() {
-        const text = this.value.toLowerCase();
-        const filtered = allSongs.filter(s => s.title.includes(text));
-        renderSongs(filtered);
-    });
-}
-
-window.addEventListener('DOMContentLoaded', () => renderSongs(allSongs));
