@@ -4,33 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>موسوعة محمد الأمين</title>
-    
     <link rel="stylesheet" href="style.css">
-    
     <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Cairo:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-
-<header>
-    <h1>موسوعة محمد الأمين</h1>
-    <p>أرشيف كلمات أغاني الموسيقار</p>
-</header>
-
-<div class="search-box">
-    <input type="text" id="myInput" placeholder="ابحث عن اسم الأغنية...">
-</div>
-
-<div class="songs-list" id="songsContainer"></div>
-
-<div id="myModal" class="modal">
-    <div class="modal-content">
-        <button class="close-btn" onclick="closeModal()">إغلاق ✕</button>
-        <h2 id="songTitle"></h2>
-        <div id="songLyrics"></div>
+    <header>
+        <h1>موسوعة محمد الأمين</h1>
+        <p>الأرشيف الكامل للكلمات</p>
+    </header>
+    <div class="search-box">
+        <input type="text" id="myInput" placeholder="ابحث عن اسم الأغنية...">
     </div>
-</div>
-
-<script src="script.js"></script>
-
+    <div class="songs-list" id="songsContainer"></div>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">إغلاق ✕</button>
+            <h2 id="songTitle"></h2>
+            <div id="songLyrics"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
