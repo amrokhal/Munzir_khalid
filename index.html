@@ -5,64 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>كلمات أغاني محمد الأمين</title>
     
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#10b981', // لون أخضر هادئ كطابع أساسي
-                    }
-                }
-            }
-        }
-    </script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
     
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="style.css">
+    <style>
+        body { font-family: 'Tajawal', sans-serif; background-color: #f8f9fa; }
+        .dark-mode { background-color: #1a1a1a; color: #ffffff; }
+        .song-card { cursor: pointer; transition: 0.3s; border-radius: 15px; border: none; shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .song-card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px rgba(0,0,0,0.1); }
+        .hidden { display: none !important; }
+        #song-lyrics { white-space: pre-line; line-height: 2; font-size: 1.2rem; }
+    </style>
 </head>
-<body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-200 transition-colors duration-300 min-h-screen">
+<body>
 
-    <header class="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-10 transition-colors duration-300">
-        <div class="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
-            <h1 class="text-2xl font-bold text-primary">أغاني محمد الأمين</h1>
-            <button id="theme-toggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors" title="تغيير المظهر">
-                <span id="theme-icon">🌙</span>
-            </button>
+    <nav class="navbar navbar-dark bg-success shadow-sm mb-4">
+        <div class="container justify-content-between">
+            <span class="navbar-brand mb-0 h1">أغاني محمد الأمين</span>
+            <button id="theme-toggle" class="btn btn-outline-light btn-sm">تبديل المظهر</button>
         </div>
-    </header>
+    </nav>
 
-    <main class="max-w-4xl mx-auto px-4 py-8">
-        
-        <section id="list-view" class="fade-in">
-            <div class="mb-8">
-                <input type="text" id="search-input" placeholder="ابحث عن أغنية..." 
-                    class="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-primary transition-shadow text-lg">
-            </div>
-
-            <div id="songs-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="container mt-4">
+        <div id="list-view">
+            <input type="text" id="search-input" class="form-control form-control-lg mb-4 shadow-sm" placeholder="ابحث عن أغنية...">
+            <div id="songs-grid" class="row g-3">
                 </div>
-            
-            <div id="no-results" class="hidden text-center text-gray-500 py-8 text-lg">
-                عذراً، لم يتم العثور على أغانٍ مطابقة للبحث.
-            </div>
-        </section>
+            <div id="no-results" class="hidden text-center mt-5 text-muted">لا توجد نتائج..</div>
+        </div>
 
-        <section id="lyrics-view" class="hidden fade-in">
-            <button id="back-btn" class="mb-6 flex items-center text-primary hover:text-green-600 dark:hover:text-green-400 font-medium transition-colors">
-                <span class="ml-2">➔</span> عودة للقائمة
-            </button>
-            
-            <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 md:p-10 shadow-sm border border-gray-100 dark:border-gray-700">
-                <h2 id="song-title" class="text-3xl font-bold mb-6 text-center text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-4"></h2>
-                <div id="song-lyrics" class="text-lg md:text-xl leading-relaxed text-center whitespace-pre-wrap">
-                    </div>
+        <div id="lyrics-view" class="hidden">
+            <button id="back-btn" class="btn btn-outline-success mb-4">← عودة للقائمة</button>
+            <div class="card shadow-lg p-4 p-md-5">
+                <h2 id="song-title" class="text-center border-bottom pb-3 mb-4 text-success"></h2>
+                <div id="song-lyrics" class="text-center"></div>
             </div>
-        </section>
-
-    </main>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
