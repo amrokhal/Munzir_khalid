@@ -1,117 +1,66 @@
-// المتغيرات العامة
 let allSongs = [];
-const listView = document.getElementById('list-view');
-const lyricsView = document.getElementById('lyrics-view');
-const songsGrid = document.getElementById('songs-grid');
-const searchInput = document.getElementById('search-input');
-const noResults = document.getElementById('no-results');
-const songTitleEl = document.getElementById('song-title');
-const songLyricsEl = document.getElementById('song-lyrics');
-const backBtn = document.getElementById('back-btn');
-const themeToggleBtn = document.getElementById('theme-toggle');
-const themeIcon = document.getElementById('theme-icon');
 
-// إعداد المظهر (Dark/Light Mode)
-function setupTheme() {
-    // التحقق من التفضيلات السابقة للمستخدم أو نظام التشغيل
-    if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        document.documentElement.classList.add('dark');
-        themeIcon.textContent = '☀️';
-    } else {
-        document.documentElement.classList.remove('dark');
-        themeIcon.textContent = '🌙';
-    }
-
-    // زر تبديل المظهر
-    themeToggleBtn.addEventListener('click', () => {
-        document.documentElement.classList.toggle('dark');
-        if (document.documentElement.classList.contains('dark')) {
-            localStorage.setItem('theme', 'dark');
-            themeIcon.textContent = '☀️';
-        } else {
-            localStorage.setItem('theme', 'light');
-            themeIcon.textContent = '🌙';
-        }
-    });
-}
-
-// جلب الأغاني من ملف JSON
+// جلب الأغاني
 async function fetchSongs() {
     try {
         const response = await fetch('songs.json');
-        if (!response.ok) throw new Error('فشل في جلب البيانات');
-        
+        if (!response.ok) throw new Error('Network error');
         allSongs = await response.json();
         renderSongs(allSongs);
     } catch (error) {
-        console.error("خطأ:", error);
-        songsGrid.innerHTML = '<p class="text-red-500 text-center col-span-full">حدث خطأ أثناء تحميل الأغاني. تأكد من تشغيل المشروع عبر سيرفر محلي (Live Server).</p>';
+        console.error("Error:", error);
+        document.getElementById('songs-grid').innerHTML = '<p class="text-danger text-center">خطأ في تحميل الأغاني. تأكد من وجود ملف songs.json</p>';
     }
 }
 
-// عرض قائمة الأغاني
+// عرض الأغاني
 function renderSongs(songs) {
-    songsGrid.innerHTML = '';
+    const grid = document.getElementById('songs-grid');
+    const noRes = document.getElementById('no-results');
+    grid.innerHTML = '';
     
     if (songs.length === 0) {
-        noResults.classList.remove('hidden');
+        noRes.classList.remove('hidden');
     } else {
-        noResults.classList.add('hidden');
-        
-        songs.forEach((song, index) => {
+        noRes.classList.add('hidden');
+        songs.forEach((song) => {
             const card = document.createElement('div');
-            card.className = 'bg-white dark:bg-gray-800 p-5 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 cursor-pointer hover:shadow-md hover:border-primary dark:hover:border-primary transition-all duration-200 transform hover:-translate-y-1';
-            
-            // أيقونة بسيطة موسيقية + اسم الأغنية
+            card.className = 'col-md-6 col-lg-4';
             card.innerHTML = `
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-full bg-green-50 dark:bg-green-900/30 flex items-center justify-center text-primary">
-                        🎵
+                <div class="card song-card shadow-sm p-3 h-100 bg-white dark-card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title fw-bold">${song.title}</h5>
+                        <button class="btn btn-sm btn-success mt-2">عرض الكلمات</button>
                     </div>
-                    <h3 class="text-xl font-bold">${song.title}</h3>
                 </div>
             `;
-            
-            // إضافة حدث الضغط لفتح الكلمات
-            card.addEventListener('click', () => showLyrics(song));
-            songsGrid.appendChild(card);
+            card.onclick = () => showLyrics(song);
+            grid.appendChild(card);
         });
     }
 }
 
-// وظيفة البحث
-searchInput.addEventListener('input', (e) => {
-    const searchTerm = e.target.value.trim().toLowerCase();
-    const filteredSongs = allSongs.filter(song => 
-        song.title.toLowerCase().includes(searchTerm) || 
-        song.lyrics.toLowerCase().includes(searchTerm)
-    );
-    renderSongs(filteredSongs);
-});
-
-// عرض كلمات الأغنية
+// عرض الكلمات
 function showLyrics(song) {
-    songTitleEl.textContent = song.title;
-    songLyricsEl.textContent = song.lyrics;
-    
-    // إخفاء القائمة وإظهار الكلمات
-    listView.classList.add('hidden');
-    lyricsView.classList.remove('hidden');
-    
-    // التمرير لأعلى الصفحة
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.getElementById('song-title').textContent = song.title;
+    document.getElementById('song-lyrics').textContent = song.lyrics;
+    document.getElementById('list-view').classList.add('hidden');
+    document.getElementById('lyrics-view').classList.remove('hidden');
+    window.scrollTo(0,0);
 }
 
-// العودة للقائمة
-backBtn.addEventListener('click', () => {
-    lyricsView.classList.add('hidden');
-    listView.classList.remove('hidden');
-    searchInput.value = ''; // تصفير البحث
-    renderSongs(allSongs); // إعادة عرض كل الأغاني
-});
+// العودة
+document.getElementById('back-btn').onclick = () => {
+    document.getElementById('lyrics-view').classList.add('hidden');
+    document.getElementById('list-view').classList.remove('hidden');
+};
 
-// تهيئة الموقع عند التحميل
-document.addEventListener('DOMContentLoaded', () => {
-    setupTheme();
-    fetchSongs();
-});
+// البحث
+document.getElementById('search-input').oninput = (e) => {
+    const term = e.target.value.toLowerCase();
+    const filtered = allSongs.filter(s => s.title.includes(term) || s.lyrics.includes(term));
+    renderSongs(filtered);
+};
+
+// تشغيل
+fetchSongs();
